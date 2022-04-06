@@ -1,4 +1,4 @@
-# ECF_blanc_VueJS
+# Project-School
 
 This template should help get you started developing with Vue 3 in Vite.
 
