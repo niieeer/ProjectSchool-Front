@@ -2,10 +2,23 @@
   <div>
     <form @submit.prevent="login">
       <h1>Connexion</h1>
-      <label for="">Email</label>
-      <input type="email" name="email" v-model="user.email" />
-      <label for="">Password</label>
-      <input type="password" v-model="user.password" />
+      <div>
+        <label for="">Email</label>
+        <input
+          type="email"
+          name="email"
+          v-model="user.email"
+          placeholder="Type your email"
+        />
+      </div>
+      <div>
+        <label for="">Password</label>
+        <input
+          type="password"
+          v-model="user.password"
+          placeholder="Type your password"
+        />
+      </div>
       <input type="submit" value="Login" />
     </form>
   </div>
@@ -13,11 +26,14 @@
 
 <script setup lang="ts">
 import axios from "axios";
-// User bind avec les champs du formq
+import { useTokenStore } from "@/stores/token";
+// User bind avec les champs du form
 const user = {
   email: "",
   password: "",
 };
+
+const store = useTokenStore();
 
 // Vérification des données (pas fini) et lancement de la fonction handleSubmit si valide
 function login() {
@@ -30,11 +46,15 @@ function login() {
 
 async function handleSubmit(user: object) {
   const response = await axios
-    .post("http://127.0.0.1:8000", user)
+    .post("http://127.0.0.1:8000/api/login_check", user)
     .then((r) => {
-      return r;
+      return r.data;
     })
     .catch((err) => console.log(err));
+  if (response.token && response.refresh_token) {
+    store.token = response.token;
+    store.refresh_token = response.refresh_token;
+  }
 }
 </script>
 
@@ -42,27 +62,42 @@ async function handleSubmit(user: object) {
 form {
   display: flex;
   flex-direction: column;
-  width: 50%;
-  background-color: rgba(135, 155, 199, 0.507);
-  padding: 20px;
+  width: 25%;
+  min-width: 300px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px 40px 40px 40px;
   border-radius: 10px;
-  gap: 10px;
+  gap: 40px;
+  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.081);
+  margin: auto;
 }
 form input {
-  padding: 10px;
+  padding: 15px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+}
+form div {
+  display: flex;
+  flex-direction: column;
+}
+textarea:focus,
+input:focus {
+  outline: none;
 }
 form h1 {
   text-align: center;
 }
 
 form input[type="submit"] {
-  background-color: rgb(136, 156, 211);
-  margin-top: 2%;
+  background-color: #1a73e8;
+  color: white;
+  border-radius: 20px;
+  margin-top: 3%;
   border: none;
   cursor: pointer;
 }
 
 form input[type="submit"]:hover {
-  background-color: rgb(130, 161, 246);
+  background-color: rgba(130, 161, 246, 0.897);
 }
 </style>

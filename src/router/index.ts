@@ -17,6 +17,11 @@ const router = createRouter({
       // which is lazy-loaded when the route is visited.
       component: () => import("../views/Login.vue"),
     },
+    {
+      path: "/logout",
+      name: "logout",
+      component: () => import("../components/LogoutController.vue"),
+    },
   ],
 });
 
