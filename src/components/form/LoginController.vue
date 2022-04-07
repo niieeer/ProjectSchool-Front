@@ -74,11 +74,13 @@ form {
 form input {
   padding: 15px;
   border: none;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.315);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.447);
 }
+
 form div {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 textarea:focus,
 input:focus {
@@ -89,15 +91,16 @@ form h1 {
 }
 
 form input[type="submit"] {
-  background-color: #1a73e8;
+  background-color: #628bc2;
   color: white;
   border-radius: 20px;
   margin-top: 3%;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 form input[type="submit"]:hover {
-  background-color: rgba(130, 161, 246, 0.897);
+  background-color: rgba(151, 111, 74, 0.897);
 }
 </style>

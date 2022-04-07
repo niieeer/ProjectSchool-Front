@@ -3,8 +3,9 @@
     <img src="src\assets\logo.png" alt="bk_logo" />
     <nav class="wrapper">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/login">Login</RouterLink>
-      <RouterLink to="/logout">Logout</RouterLink>
+      <RouterLink v-if="store.token == ''" to="/login">Login</RouterLink>
+      <RouterLink v-if="store.token" to="/students">Student list</RouterLink>
+      <RouterLink v-if="store.token" to="/logout">Logout</RouterLink>
     </nav>
   </header>
   <RouterView />
@@ -12,6 +13,8 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import { useTokenStore } from "@/stores/token";
+const store = useTokenStore();
 </script>
 
 <style>
@@ -25,17 +28,36 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: rgb(186, 186, 186);
+  background-color: rgb(255, 255, 255);
   height: 100px;
   padding: 20px;
+}
+.wrapper a {
+  text-decoration: none;
+  color: black;
+  font-weight: 600;
+  text-decoration: underline rgba(255, 255, 255, 0);
+  font-size: 20px;
+  transition: 0.4s;
+}
+
+.wrapper a:hover {
+  text-decoration: underline;
+}
+
+.wrapper {
+  display: flex;
+  gap: 50px;
 }
 header img {
   height: 100%;
 }
-body, html {
+body,
+html {
   font-family: "Open Sans", sans-serif;
   padding: 0;
   margin: 0;
   background-color: rgb(228, 231, 232);
+  height: 100vh;
 }
 </style>
