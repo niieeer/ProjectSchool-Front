@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import isLog from "@/plugins/loginCheck";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -28,6 +29,18 @@ const router = createRouter({
       component: () => import("../views/Student.vue"),
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.name !== "home" && !isLog()) {
+    next({ name: "home" });
+  } else {
+    if (to.name === "home" && isLog()) {
+      next({ name: "students" });
+    }
+
+    next();
+  }
 });
 
 export default router;

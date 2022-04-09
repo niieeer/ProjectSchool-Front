@@ -13,7 +13,7 @@ export const useTokenStore = defineStore({
   },
   actions: {
     setToken(tk: string) {
-      this.token == tk; 
+      this.token == tk;
     },
     setRefreshToken(rtk: string) {
       this.token == rtk;

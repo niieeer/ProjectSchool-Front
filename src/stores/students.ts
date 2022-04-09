@@ -4,6 +4,7 @@ export const useStudentStore = defineStore({
   id: "students",
   state: () => ({
     students: [],
+    name: [],
   }),
   persist: true,
   getters: {

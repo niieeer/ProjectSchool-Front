@@ -13,6 +13,7 @@
 
 <script setup lang="ts">
 import { RouterLink, RouterView } from "vue-router";
+import isLog from "@/plugins/loginCheck";
 import { useTokenStore } from "@/stores/token";
 const store = useTokenStore();
 </script>

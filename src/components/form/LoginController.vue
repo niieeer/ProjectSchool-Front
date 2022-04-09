@@ -25,15 +25,16 @@
 </template>
 
 <script setup lang="ts">
+// import handleSubmit from "../../plugins/fetch";
 import axios from "axios";
 import { useTokenStore } from "@/stores/token";
+const store = useTokenStore();
+
 // User bind avec les champs du form
 const user = {
   email: "",
   password: "",
 };
-
-const store = useTokenStore();
 
 // Vérification des données (pas fini) et lancement de la fonction handleSubmit si valide
 function login() {

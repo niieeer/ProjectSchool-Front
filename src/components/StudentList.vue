@@ -12,22 +12,20 @@
         <th>classe</th>
       </tr>
       <tr v-for="student in studentStore.students" :key="student['@id']">
-        <td>
-          {{ student.lastname }}
-        </td>
+        <td>{{ student.lastname }}</td>
         <td>{{ student.firstname }}</td>
-        <td>
-          {{ student.sexe }}
-        </td>
+        <td>{{ student.sexe }}</td>
         <td>{{ student.email }}</td>
-        <td>
-          {{ student.classe }}
+        <td v-if="student.classe == classeStore.classes[0]['@id']">
+          {{ classeStore.classes[0]["name"] }}
         </td>
         <td>
-          <button>Modify</button>
+          <button class="bluebutton">Modify</button>
         </td>
         <td>
-          <button class="redbutton">Delete</button>
+          <button @click="deleteStudent(student)" class="redbutton">
+            Delete
+          </button>
         </td>
       </tr>
     </table>
@@ -38,14 +36,16 @@
 import { onMounted } from "vue";
 import { useTokenStore } from "@/stores/token";
 import { useStudentStore } from "@/stores/students";
+import { useClasseStore } from "@/stores/classes";
 import axios from "axios";
-// import axios from "axios";
 
 const store = useTokenStore();
 const studentStore = useStudentStore();
+const classeStore = useClasseStore();
 
 onMounted(() => {
   fetchStudents();
+  fetchClasses();
 });
 
 async function fetchStudents() {
@@ -63,9 +63,28 @@ async function fetchStudents() {
   }
 }
 
-// async function fetchClasses() {
-//     let r = await axios.get("")
-// }
+async function fetchClasses() {
+  let r = await fetch("http://127.0.0.1:8000/api/classes", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${store.token}`,
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((e) => console.log(e));
+  if (r) {
+    classeStore.classes = r["hydra:member"];
+  }
+}
+async function deleteStudent(studentId: object) {
+  await axios
+    .delete(`http://127.0.0.1:8000/api/students`, studentId)
+    .then((r) => {
+      return r.data;
+    })
+    .catch((err) => console.log(err));
+}
 </script>
 
 <style scoped>
@@ -89,7 +108,16 @@ td button {
 }
 
 .redbutton {
-  background-color:#C82333;
+  background-color: #c82333;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.bluebutton {
+  background-color: #0069d9;
   color: white;
   border: none;
   border-radius: 10px;

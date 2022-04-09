@@ -6,7 +6,7 @@ const store = useTokenStore();
 </script>
 
 <template>
-  <main>
+  <main class="m">
     <LoginController class="loginController" v-if="store.token == ''" />
   </main>
 </template>
