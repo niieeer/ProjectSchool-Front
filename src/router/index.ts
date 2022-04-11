@@ -28,6 +28,11 @@ const router = createRouter({
       name: "students",
       component: () => import("../views/Student.vue"),
     },
+    {
+      path: "/modify/:id",
+      name: "modify",
+      component: () => import("../views/modifyStudent.vue"),
+    },
   ],
 });
 
@@ -36,10 +41,12 @@ router.beforeEach((to, from, next) => {
     next({ name: "home" });
   } else {
     if (to.name === "home" && isLog()) {
-      next({ name: "students" });
+      next({ name: "logout" });
+      return;
     }
 
     next();
+    return;
   }
 });
 

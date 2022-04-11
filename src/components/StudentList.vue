@@ -19,9 +19,7 @@
         <td v-if="student.classe == classeStore.classes[0]['@id']">
           {{ classeStore.classes[0]["name"] }}
         </td>
-        <td>
-          <button class="bluebutton">Modify</button>
-        </td>
+        <td><button>modify</button></td>
         <td>
           <button @click="deleteStudent(student)" class="redbutton">
             Delete
@@ -37,6 +35,7 @@ import { onMounted } from "vue";
 import { useTokenStore } from "@/stores/token";
 import { useStudentStore } from "@/stores/students";
 import { useClasseStore } from "@/stores/classes";
+import router from "@/router";
 import axios from "axios";
 
 const store = useTokenStore();
@@ -61,6 +60,9 @@ async function fetchStudents() {
   if (response) {
     studentStore.students = response["hydra:member"];
   }
+  if (response.code == 401) {
+    router.push("logout");
+  }
 }
 
 async function fetchClasses() {
@@ -77,13 +79,32 @@ async function fetchClasses() {
     classeStore.classes = r["hydra:member"];
   }
 }
-async function deleteStudent(studentId: object) {
-  await axios
-    .delete(`http://127.0.0.1:8000/api/students`, studentId)
+
+async function deleteStudent(student) {
+  console.log(student.id);
+
+  let r = await axios(`http://127.0.0.1:8000${student["@id"]}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${store.token}`,
+    },
+  })
     .then((r) => {
-      return r.data;
+      return r;
     })
-    .catch((err) => console.log(err));
+    .catch((e) => console.log(e));
+  console.log(r);
+
+  if (r.status == 204) {
+    deleteBdd(student);
+  }
+}
+
+function deleteBdd(student) {
+  var index = studentStore.students.findIndex((e) => e.id == student.id);
+  console.log(index);
+  studentStore.students.splice(index, 1);
 }
 </script>
 
