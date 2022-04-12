@@ -4,7 +4,9 @@
     <nav class="wrapper">
       <RouterLink to="/">Home</RouterLink>
       <RouterLink v-if="store.token == ''" to="/login">Login</RouterLink>
-      <RouterLink v-if="store.token" to="/students">Student list</RouterLink>
+      <RouterLink v-if="store.token" to="/students">List</RouterLink>
+      <RouterLink v-if="store.token" to="/addstudent">Add Student</RouterLink>
+      <RouterLink v-if="store.token" to="/addprof">Add Professor</RouterLink>
       <RouterLink v-if="store.token" to="/logout">Logout</RouterLink>
     </nav>
   </header>

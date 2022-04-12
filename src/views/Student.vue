@@ -1,12 +1,14 @@
 <template>
   <div>
-    <StudentList />
+    <List />
   </div>
 </template>
 
 <script setup lang="ts">
-import StudentList from "../components/StudentList.vue";
+import List from "../components/List.vue";
 
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
