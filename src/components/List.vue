@@ -29,20 +29,20 @@ onMounted(() => {
 
 // CLASSES //
 
-  async function fetchClasses() {
-    let r = await fetch("http://127.0.0.1:8000/api/classes", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${store.token}`,
-      },
-    })
-      .then((resp) => resp.json())
-      .catch((e) => console.log(e));
-    if (r) {
-      classeStore.classes = r["hydra:member"];
-    }
+async function fetchClasses() {
+  let r = await fetch("http://127.0.0.1:8000/api/classes", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${store.token}`,
+    },
+  })
+    .then((resp) => resp.json())
+    .catch((e) => console.log(e));
+  if (r) {
+    classeStore.classes = r["hydra:member"];
   }
+}
 
 // STUDENT
 
@@ -64,7 +64,7 @@ async function fetchStudents() {
   }
 }
 
- async function deleteStudent(student) {
+async function deleteStudent(student) {
   let r = await axios(`http://127.0.0.1:8000${student["@id"]}`, {
     method: "DELETE",
     headers: {
@@ -95,48 +95,46 @@ async function fetchProfessors() {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${store.token}`,
-    }
+    },
   })
-  .then((promise) => promise.json())
-  .catch((e) => console.log(e))
+    .then((promise) => promise.json())
+    .catch((e) => console.log(e));
   if (response) {
     professorStore.professors = response["hydra:member"];
   }
 }
 
 async function deleteProfessor(professor) {
-  let resp = await axios.delete(`http://127.0.0.1:8000${professor['@id']}`, {
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${store.token}`,
-    },
-  })
+  let resp = await axios
+    .delete(`http://127.0.0.1:8000${professor["@id"]}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${store.token}`,
+      },
+    })
     .then((resp) => {
       return resp;
     })
     .catch((e) => console.log(e));
 
-     if (resp.status == 204) {
+  if (resp.status == 204) {
     deleteProfBdd(professor);
   }
 }
 
 function deleteProfBdd(professor) {
   var index = professorStore.professors.findIndex((e) => e.id == professor.id);
-  professorStore.professors.splice(index, 1)
+  professorStore.professors.splice(index, 1);
 }
-
-
 </script>
 
 <style scoped>
 .main {
   display: flex;
   flex-direction: column;
-  margin: 20px;
+  padding: 20px;
   align-items: center;
   gap: 30px;
-  width:100%;
+  width: 100%;
 }
-
 </style>

@@ -35,21 +35,27 @@ const router = createRouter({
       name: "addprof",
       component: () => import("../views/AddProf.vue"),
     },
+    {
+      path: "/modifyprof/:id",
+      name: "modifyprof",
+      component: () => import("../views/ModifyProfView.vue"),
+    },
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.name !== "home" && !isLog()) {
-    next({ name: "home" });
-  } else {
-    if (to.name === "home" && isLog()) {
-      next({ name: "logout" });
-      return;
-    }
+// router.beforeEach((to, from, next) => {
+//   if (to.name == "students" && isLog()) {
+//     next({ name: "err" });
+//     return;
+//   } else {
+//     if (to.name === "home" && isLog()) {
+//       next({ name: "logout" });
+//       return;
+//     }
 
-    next();
-    return;
-  }
-});
+//     next();
+//     return;
+//   }
+// });
 
 export default router;

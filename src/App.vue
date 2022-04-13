@@ -22,7 +22,12 @@ const store = useTokenStore();
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
-
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Open Sans", sans-serif;
+}
 .wrapper {
   display: flex;
   gap: 20px;
@@ -54,13 +59,5 @@ header {
 }
 header img {
   height: 100%;
-}
-body,
-html {
-  font-family: "Open Sans", sans-serif;
-  padding: 0;
-  margin: 0;
-  background-color: rgb(228, 231, 232);
-  height: 100vh;
 }
 </style>
