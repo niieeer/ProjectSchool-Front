@@ -21,5 +21,5 @@ export const useStudentStore = defineStore({
   },
   actions: {},
 });
-type studentType = { classe: String; classename?: String };
-type classeType = { name: String; "@id": String };
+type studentType = { classe: string; classename?: string };
+type classeType = { name: string; "@id": string };

@@ -8,6 +8,4 @@
 import ModifyProfessor from "../components/form/ModifyProfessor.vue";
 </script>
 
-<style>
-
-</style>
+<style></style>

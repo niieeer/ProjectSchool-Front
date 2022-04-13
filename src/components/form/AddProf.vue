@@ -70,12 +70,10 @@
 <script setup>
 import { useClasseStore } from "../../stores/classes";
 import { useTokenStore } from "@/stores/token";
-import { useProfessorStore } from "@/stores/professors";
 import axios from "axios";
 
 const store = useTokenStore();
 const storeClasse = useClasseStore();
-const professorStore = useProfessorStore();
 
 const newProf = {
   lastname: "",
@@ -90,7 +88,7 @@ const newProf = {
 };
 
 async function addProfessor() {
-  let r = await axios
+  return await axios
     .post("http://127.0.0.1:8000/api/professors", newProf, {
       headers: {
         "Content-Type": "application/ld+json",
@@ -123,7 +121,7 @@ form {
   padding: 40px;
   border-radius: 10px;
   gap: 40px;
-  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.081);
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0);
 }
 
 form input {
@@ -170,5 +168,18 @@ form input[type="submit"]:hover {
 
 .side-form div {
   width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+.side-form {
+    flex-direction: column;
+}
+
+.main {
+  height: 150vh;
+}
+form {
+  width: 70%;
+}
 }
 </style>

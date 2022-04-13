@@ -24,4 +24,13 @@ main {
   align-items: center;
   gap: 40px;
 }
+
+
+@media screen and (max-width: 800px) {
+  main {
+    flex-direction: column;
+    height: 120vh;
+  }
+}
+
 </style>

@@ -28,6 +28,12 @@
   height: 500px;
   width: 30%;
 }
+@media screen and (max-width: 800px) {
+.contenu1 {
+    width: 60%;
+    min-width: 50%;
+}
+}
 .contenu1 h2,
 p {
   color: rgb(0, 0, 0);
@@ -35,7 +41,7 @@ p {
 }
 .image {
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
 }
 .link {

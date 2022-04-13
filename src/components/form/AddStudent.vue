@@ -191,4 +191,15 @@ form input[type="submit"]:hover {
 .side-form div {
   width: 100%;
 }
+.side-form {
+    flex-direction: column;
+}
+
+.main {
+  height: 110vh;
+}
+form {
+  width: 70%;
+}
+
 </style>

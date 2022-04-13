@@ -10,9 +10,9 @@ const store = useTokenStore();
 function logout() {
   store.token = "";
   store.refresh_token = "";
-  store.role="";
+  store.role = "";
   router.push("/");
-} 
+}
 </script>
 
 <style scoped></style>

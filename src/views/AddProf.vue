@@ -6,6 +6,4 @@
 import AddProf from "@/components/form/AddProf.vue";
 </script>
 
-<style>
-
-</style>
+<style></style>

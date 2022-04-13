@@ -3,10 +3,9 @@ import { defineStore } from "pinia";
 export const useProfessorStore = defineStore({
   id: "professors",
   state: () => ({
-    professors: []
+    professors: [],
   }),
   persist: true,
-  getters: {
-  },
+  getters: {},
   actions: {},
 });
