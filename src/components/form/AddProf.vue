@@ -1,20 +1,26 @@
 <template>
-  <div>
+  <div class="main">
     <form @submit.prevent="addProfessor">
-      <label for="lastname">Nom</label>
-      <input
-        type="text"
-        name="lastname"
-        v-model="newProf.lastname"
-        placeholder="LastName"
-      />
-      <label for="firstname">Prenom</label>
-      <input
-        type="text"
-        name="firstname"
-        v-model="newProf.firstname"
-        placeholder="FirstName"
-      />
+      <div class="side-form">
+        <div>
+          <label for="lastname">Nom</label>
+          <input
+            type="text"
+            name="lastname"
+            v-model="newProf.lastname"
+            placeholder="LastName"
+          />
+        </div>
+        <div>
+          <label for="firstname">Prenom</label>
+          <input
+            type="text"
+            name="firstname"
+            v-model="newProf.firstname"
+            placeholder="FirstName"
+          />
+        </div>
+      </div>
       <label for="email">Email</label>
       <input
         type="email"
@@ -54,12 +60,7 @@
         placeholder="seniority"
       />
       <label for="age">Age</label>
-      <input
-        type="number"
-        name="age"
-        v-model="newProf.age"
-        placeholder="age"
-      />
+      <input type="number" name="age" v-model="newProf.age" placeholder="age" />
       <input type="submit" value="ADD PROFESSOR" />
       <!-- <p class="red" v-if="studentStore.error !== ''">{{ studentStore.error }}</p> -->
     </form>
@@ -85,20 +86,89 @@ const newProf = {
   email: "",
   seniority: "",
   age: 0,
-  salary: 0
+  salary: 0,
 };
 
 async function addProfessor() {
-  let r = await axios.post("http://127.0.0.1:8000/api/professors", newProf, {
-    headers: {
-      "Content-Type": "application/ld+json",
-      Authorization: `Bearer ${store.token}`,
-    },
-  })
-  .then((resp) => {
-      return resp
-  })
+  let r = await axios
+    .post("http://127.0.0.1:8000/api/professors", newProf, {
+      headers: {
+        "Content-Type": "application/ld+json",
+        Authorization: `Bearer ${store.token}`,
+      },
+    })
+    .then((resp) => {
+      return resp;
+    });
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 130vh;
+}
+.red {
+  color: red;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  min-width: 300px;
+  background-color: rgb(255, 255, 255);
+  padding: 40px;
+  border-radius: 10px;
+  gap: 40px;
+  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.081);
+}
+
+form input {
+  padding: 15px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.447);
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+form h1 {
+  text-align: center;
+}
+
+form input[type="submit"] {
+  background-color: #628bc2;
+  color: white;
+  border-radius: 20px;
+  margin-top: 3%;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form input[type="submit"]:hover {
+  background-color: rgba(151, 111, 74, 0.897);
+}
+
+.side-form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 30px;
+}
+
+.side-form div {
+  width: 100%;
+}
+</style>

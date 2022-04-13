@@ -1,13 +1,11 @@
 <template>
-    <div>
-       <AddStudent /> 
-    </div>
+  <div>
+    <AddStudent />
+  </div>
 </template>
 
 <script setup>
 import AddStudent from "../components/form/AddStudent.vue";
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

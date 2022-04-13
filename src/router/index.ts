@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-import isLog from "@/plugins/loginCheck";
-
+// import { useTokenStore } from "@/stores/token";
+// const store = useTokenStore();
+const ok = true
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,6 +20,13 @@ const router = createRouter({
       path: "/students",
       name: "students",
       component: () => import("../views/Student.vue"),
+      beforeEnter: (to, from, next) => {
+        if (ok) {
+          next(false);
+        } else {
+          next();
+        }
+      },
     },
     {
       path: "/modify/:id",
@@ -40,22 +48,11 @@ const router = createRouter({
       name: "modifyprof",
       component: () => import("../views/ModifyProfView.vue"),
     },
+    {
+      path: "/:catchAll(.*)",
+      name: "err",
+      component: () => import("../views/ErrView.vue"),
+    },
   ],
 });
-
-// router.beforeEach((to, from, next) => {
-//   if (to.name == "students" && isLog()) {
-//     next({ name: "err" });
-//     return;
-//   } else {
-//     if (to.name === "home" && isLog()) {
-//       next({ name: "logout" });
-//       return;
-//     }
-
-//     next();
-//     return;
-//   }
-// });
-
 export default router;

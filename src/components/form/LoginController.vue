@@ -63,13 +63,12 @@ async function handleSubmit(user: object) {
 form {
   display: flex;
   flex-direction: column;
-  width: 25%;
-  min-width: 300px;
+  min-width: 400px;
   background-color: rgb(255, 255, 255);
-  padding: 10px 40px 40px 40px;
+  padding: 20px 40px 40px 40px;
   border-radius: 10px;
   gap: 40px;
-  box-shadow: 5px 2px 5px rgba(0, 0, 0, 0.081);
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0);
   margin: auto;
 }
 form input {

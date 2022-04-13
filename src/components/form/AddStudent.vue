@@ -1,25 +1,26 @@
 <template>
-  <div>
+  <div class="main">
     <form @submit.prevent="verifDatas">
-      <label for="lastname">Nom</label>
-      <input
-        type="text"
-        name="lastname"
-        v-model="newStudent.lastname"
-        placeholder="LastName"
-      />
-      <label for="firstname">Prenom</label>
-      <input
-        type="text"
-        name="firstname"
-        v-model="newStudent.firstname"
-        placeholder="FirstName"
-      />
-      <label for="sexe">Sexe</label>
-      <select name="sexe" id="sexe" v-model="newStudent.sexe">
-        <option value="male">male</option>
-        <option value="female">female</option>
-      </select>
+      <div class="side-form">
+        <div>
+          <label for="lastname">Nom</label>
+          <input
+            type="text"
+            name="lastname"
+            v-model="newStudent.lastname"
+            placeholder="LastName"
+          />
+        </div>
+        <div>
+          <label for="firstname">Prenom</label>
+          <input
+            type="text"
+            name="firstname"
+            v-model="newStudent.firstname"
+            placeholder="FirstName"
+          />
+        </div>
+      </div>
       <label for="email">Email</label>
       <input
         type="email"
@@ -34,27 +35,40 @@
         v-model="newStudent.password"
         placeholder="Password"
       />
-      <label for="classe">Classe</label>
-      <select
-        name="classe-select"
-        id="classe-select"
-        v-model="newStudent.classe"
-      >
-        <option
-          v-for="classe in storeClasse.classes"
-          :key="classe.id"
-          :value="classe['@id']"
-        >
-          {{ classe.name }}
-        </option>
-      </select>
+      <div class="side-form">
+        <div>
+          <label for="sexe">Sexe</label>
+          <select name="sexe" id="sexe" v-model="newStudent.sexe">
+            <option value="male">male</option>
+            <option value="female">female</option>
+          </select>
+        </div>
+        <div>
+          <label for="classe">Classe</label>
+          <select
+            name="classe-select"
+            id="classe-select"
+            v-model="newStudent.classe"
+          >
+            <option
+              v-for="classe in storeClasse.classes"
+              :key="classe.id"
+              :value="classe['@id']"
+            >
+              {{ classe.name }}
+            </option>
+          </select>
+        </div>
+      </div>
       <input type="submit" value="ADD STUDENT" />
-      <p class="red" v-if="studentStore.error !== ''">{{ studentStore.error }}</p>
+      <p class="red" v-if="studentStore.error !== ''">
+        {{ studentStore.error }}
+      </p>
     </form>
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { useClasseStore } from "../../stores/classes";
 import { useTokenStore } from "@/stores/token";
 import { useStudentStore } from "@/stores/students";
@@ -91,7 +105,7 @@ async function addStudent() {
       },
     })
     .then((resp) => {
-      return resp
+      return resp;
     })
     .catch((e) => console.log(e));
 
@@ -110,17 +124,71 @@ async function addStudent() {
 </script>
 
 <style scoped>
+.main {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .red {
   color: red;
 }
 
 form {
   display: flex;
-  gap: 20px;
   flex-direction: column;
-  padding: 50px;
+  width: 50%;
+  min-width: 300px;
+  background-color: rgba(255, 255, 255, 0.261);
+  padding: 40px;
+  border-radius: 10px;
+  gap: 40px;
+  box-shadow: 1px 1px 2px 1px rgb(0, 0, 0);
 }
+
 form input {
-  padding: 20px;
+  padding: 15px;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.447);
+}
+
+form div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
+}
+
+form h1 {
+  text-align: center;
+}
+
+form input[type="submit"] {
+  background-color: #628bc2;
+  color: white;
+  border-radius: 20px;
+  margin-top: 3%;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+form input[type="submit"]:hover {
+  background-color: rgba(151, 111, 74, 0.897);
+}
+
+.side-form {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 30px;
+}
+
+.side-form div {
+  width: 100%;
 }
 </style>
