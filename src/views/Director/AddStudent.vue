@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import AddStudent from "../components/form/AddStudent.vue";
+import AddStudent from "../../components/form/AddStudent.vue";
 </script>
 
 <style lang="scss" scoped></style>

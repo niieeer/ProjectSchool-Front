@@ -127,8 +127,6 @@ async function addStudent() {
 .main {
   height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 .red {
   color: red;
@@ -143,7 +141,10 @@ form {
   padding: 40px;
   border-radius: 10px;
   gap: 40px;
+  margin-top: 20%;
   box-shadow: 1px 1px 2px 1px rgb(0, 0, 0);
+  height: min-content;
+  margin: auto;
 }
 
 form input {
@@ -191,15 +192,30 @@ form input[type="submit"]:hover {
 .side-form div {
   width: 100%;
 }
-.side-form {
-    flex-direction: column;
-}
 
 .main {
-  height: 110vh;
+  height: 100vh;
+}
+@media screen and (max-height: 700px) {
+  form {
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .side-form {
+    flex-direction: column;
+  }
+
+  .main {
+    height: 150vh;
+  }
+  form {
+    width: 70%;
+  }
 }
 form {
   width: 70%;
 }
-
 </style>

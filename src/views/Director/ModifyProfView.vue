@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import ModifyProfessor from "../components/form/ModifyProfessor.vue";
+import ModifyProfessor from "../../components/form/ModifyProfessor.vue";
 </script>
 
 <style></style>

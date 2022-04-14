@@ -6,19 +6,20 @@
     />
     <nav class="wrapper">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink v-if="store.token" to="/students">List</RouterLink>
-      <RouterLink v-if="store.token" to="/addstudent">Add Student</RouterLink>
-      <RouterLink v-if="store.token" to="/addprof">Add Professor</RouterLink>
-      <RouterLink v-if="store.token" to="/logout">Logout</RouterLink>
+      <RouterLink v-if="store.role == 'Director'" to="/students">List</RouterLink>
+      <RouterLink v-if="store.role == 'Professor'" to="/viewclass">View Classe</RouterLink>
+      <RouterLink v-if="store.role == 'Director'" to="/addstudent">Add Student</RouterLink>
+      <RouterLink v-if="store.role == 'Director'" to="/addprof">Add Professor</RouterLink>
+      <RouterLink v-if="store.role" to="/logout">Logout</RouterLink>
     </nav>
     <nav class="wrapper-mobile">
       <span @click="OpenNav" class="material-icons"> menu </span>
       <div class="wrapper-mobile-link-hidden">
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink v-if="store.token" to="/students">List</RouterLink>
-        <RouterLink v-if="store.token" to="/addstudent">Add Student</RouterLink>
-        <RouterLink v-if="store.token" to="/addprof">Add Professor</RouterLink>
-        <RouterLink v-if="store.token" to="/logout">Logout</RouterLink>
+        <RouterLink v-if="store.role  == 'Director'" to="/students">List</RouterLink>
+        <RouterLink v-if="store.role == 'Director'" to="/addstudent">Add Student</RouterLink>
+        <RouterLink v-if="store.role == 'Director'" to="/addprof">Add Professor</RouterLink>
+        <RouterLink v-if="store.role" to="/logout">Logout</RouterLink>
       </div>
     </nav>
   </header>

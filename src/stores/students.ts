@@ -18,6 +18,14 @@ export const useStudentStore = defineStore({
           }
         });
       }),
+      getStudent: (state) =>
+      state.students.map((student: studentType) => {
+        classeStore.classe.map((classe: classeType) => {
+          if (student.classe == classe["@id"]) {
+            student.classename = classe.name;
+          }
+        });
+      }),
   },
   actions: {},
 });

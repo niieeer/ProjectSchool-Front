@@ -5,9 +5,7 @@
 
 <script setup lang="ts">
 import { RouterView } from "vue-router";
-import { useTokenStore } from "@/stores/token";
 import Navigation from "./components/essential/Navigation.vue";
-const store = useTokenStore();
 </script>
 
 <style>

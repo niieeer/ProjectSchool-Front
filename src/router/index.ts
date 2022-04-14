@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
-// import { useTokenStore } from "@/stores/token";
-// const store = useTokenStore();
-const ok = true;
+import isLog from "../plugins/loginCheck";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -17,12 +15,24 @@ const router = createRouter({
       component: () => import("../components/LogoutController.vue"),
     },
     {
+      path: "/viewclass",
+      name: "viewclass",
+      component: () => import("../views/Professor/Classe.vue"),
+      beforeEnter: (to, from, next) => {
+        if (isLog() !== "Professor") {
+          next("err");
+        } else {
+          next();
+        }
+      },
+    },
+    {
       path: "/students",
       name: "students",
-      component: () => import("../views/Student.vue"),
+      component: () => import("../views/Director/List.vue"),
       beforeEnter: (to, from, next) => {
-        if (ok) {
-          next(false);
+        if (isLog() !== "Director") {
+          next("err");
         } else {
           next();
         }
@@ -31,22 +41,55 @@ const router = createRouter({
     {
       path: "/modify/:id",
       name: "modify",
-      component: () => import("../views/ModifyStudentView.vue"),
+      component: () => import("../views/Director/ModifyStudentView.vue"),
+      beforeEnter: (to, from, next) => {
+        if (isLog() !== "Director") {
+          next("err");
+        } else {
+          next();
+        }
+      },
     },
     {
       path: "/addstudent",
       name: "addstudent",
-      component: () => import("../views/AddStudent.vue"),
+      component: () => import("../views/Director/AddStudent.vue"),
+      beforeEnter: (to, from, next) => {
+        if (isLog() !== "Director") {
+          next("err");
+        } else {
+          next();
+        }
+      },
     },
     {
       path: "/addprof",
       name: "addprof",
-      component: () => import("../views/AddProf.vue"),
+      component: () => import("../views/Director/AddProf.vue"),
+      beforeEnter: (to, from, next) => {
+        if (isLog() !== "Director") {
+          next("err");
+        } else {
+          next();
+        }
+      },
     },
     {
       path: "/modifyprof/:id",
       name: "modifyprof",
-      component: () => import("../views/ModifyProfView.vue"),
+      component: () => import("../views/Director/ModifyProfView.vue"),
+      beforeEnter: (to, from, next) => {
+        if (isLog() !== "Director") {
+          next("err");
+        } else {
+          next();
+        }
+      },
+    },
+    {
+      path: "/addnote",
+      name: "addnote",
+      component: () => import("../components/form/AddNote.vue"),
     },
     {
       path: "/:catchAll(.*)",

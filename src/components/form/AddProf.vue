@@ -62,16 +62,18 @@
       <label for="age">Age</label>
       <input type="number" name="age" v-model="newProf.age" placeholder="age" />
       <input type="submit" value="ADD PROFESSOR" />
-      <!-- <p class="red" v-if="studentStore.error !== ''">{{ studentStore.error }}</p> -->
+      <p class="red" v-if="professorStore.error !== ''">{{ professorStore.error }}</p>
     </form>
   </div>
 </template>
 
 <script setup>
 import { useClasseStore } from "../../stores/classes";
+import { useProfessorStore } from "@/stores/professors";
 import { useTokenStore } from "@/stores/token";
 import axios from "axios";
 
+const professorStore = useProfessorStore();
 const store = useTokenStore();
 const storeClasse = useClasseStore();
 
@@ -88,7 +90,8 @@ const newProf = {
 };
 
 async function addProfessor() {
-  return await axios
+  let r =
+   await axios
     .post("http://127.0.0.1:8000/api/professors", newProf, {
       headers: {
         "Content-Type": "application/ld+json",
@@ -98,10 +101,14 @@ async function addProfessor() {
     .then((resp) => {
       return resp;
     });
+
+    if (r.status == 201) {
+      professorStore.error = "L'ajout a été effectuée";
+    }
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .main {
   display: flex;
   justify-content: center;
@@ -109,7 +116,7 @@ async function addProfessor() {
   height: 130vh;
 }
 .red {
-  color: red;
+  color: rgb(0, 255, 42);
 }
 
 form {
@@ -170,7 +177,7 @@ form input[type="submit"]:hover {
   width: 100%;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 820px) {
 .side-form {
     flex-direction: column;
 }
